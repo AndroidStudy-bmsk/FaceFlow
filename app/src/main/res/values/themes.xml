@@ -3,7 +3,9 @@
     <style name="Base.Theme.FaceFlow" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowLightNavigationBar">@android:color/transparent</item>
     </style>
-
     <style name="Theme.FaceFlow" parent="Base.Theme.FaceFlow" />
 </resources>
