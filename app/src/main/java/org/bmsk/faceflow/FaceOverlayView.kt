@@ -39,8 +39,9 @@ class FaceOverlayView @JvmOverloads constructor(
 
     private val facePath = Path()
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        drawOverlay(canvas)
     }
 
     fun setSize(rectF: RectF, sizeF: SizeF, pointF: PointF) {
