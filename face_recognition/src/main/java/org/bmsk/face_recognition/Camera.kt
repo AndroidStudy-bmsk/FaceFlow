@@ -42,6 +42,7 @@ class Camera(private val context: Context) : ActivityCompat.OnRequestPermissions
     private var listener: FaceAnalyzerListener? = null
 
     fun initCamera(layout: ViewGroup, listener: FaceAnalyzerListener) {
+        val context = layout.context
         this.listener = listener
         previewView = PreviewView(context)
         layout.addView(previewView)
@@ -74,7 +75,7 @@ class Camera(private val context: Context) : ActivityCompat.OnRequestPermissions
             cameraProvider.bindToLifecycle(
                 context as LifecycleOwner,
                 cameraSelector,
-                preview
+                preview,
             )
         } catch (e: Exception) {
             e.stackTrace
@@ -90,7 +91,7 @@ class Camera(private val context: Context) : ActivityCompat.OnRequestPermissions
             .also {
                 it.setAnalyzer(
                     cameraExecutor,
-                    faceAnalyzer
+                    faceAnalyzer,
                 )
             }
 
@@ -99,10 +100,9 @@ class Camera(private val context: Context) : ActivityCompat.OnRequestPermissions
                 context as LifecycleOwner,
                 cameraSelector,
                 preview,
-                analysisUseCase
+                analysisUseCase,
             )
-        } catch (e: Exception) {
-
+        } catch (_: Exception) {
         }
     }
 
@@ -110,14 +110,13 @@ class Camera(private val context: Context) : ActivityCompat.OnRequestPermissions
         try {
             cameraProviderFuture.get().unbindAll()
             previewView.releasePointerCapture()
-        } catch (e: Exception) {
-
+        } catch (_: Exception) {
         }
     }
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         var flag = true
         if (grantResults.isNotEmpty()) {

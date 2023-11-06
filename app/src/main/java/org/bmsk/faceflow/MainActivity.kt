@@ -2,10 +2,9 @@ package org.bmsk.faceflow
 
 import android.graphics.PointF
 import android.graphics.RectF
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.SizeF
-import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.transition.TransitionManager
 import org.bmsk.face_recognition.Camera
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity(), FaceAnalyzerListener {
         }
     }
 
-
     override fun detect() {
     }
 
@@ -58,7 +56,7 @@ class MainActivity : AppCompatActivity(), FaceAnalyzerListener {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         camera.onRequestPermissionsResult(requestCode, permissions, grantResults)

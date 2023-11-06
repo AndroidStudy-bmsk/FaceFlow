@@ -19,28 +19,24 @@ import android.view.View
 class FaceOverlayView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
-
     private val backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.BLACK
         alpha = 90
         style = Paint.Style.FILL
     }
-
     private val facePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.GRAY
         style = Paint.Style.STROKE
         strokeWidth = 10F
-        pathEffect = DashPathEffect(floatArrayOf(10F, 10F), 0F)
+        pathEffect = DashPathEffect(floatArrayOf(10f, 10f), 0F)
     }
-
     private val progressPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = Color.YELLOW
         style = Paint.Style.STROKE
         strokeWidth = 10F
     }
-
     private val maskPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
     }
@@ -57,7 +53,6 @@ class FaceOverlayView @JvmOverloads constructor(
     fun setSize(rectF: RectF, sizeF: SizeF, pointF: PointF) {
         val topOffset = sizeF.width / 2
         val bottomOffset = sizeF.width / 5
-
         with(facePath) {
             reset()
             moveTo(pointF.x, rectF.top)
@@ -67,7 +62,7 @@ class FaceOverlayView @JvmOverloads constructor(
                 rectF.right + bottomOffset,
                 rectF.bottom,
                 pointF.x,
-                rectF.bottom
+                rectF.bottom,
             )
             cubicTo(
                 rectF.left - bottomOffset,
@@ -75,7 +70,7 @@ class FaceOverlayView @JvmOverloads constructor(
                 rectF.left - topOffset,
                 rectF.top,
                 pointF.x,
-                rectF.top
+                rectF.top,
             )
             close()
         }
@@ -86,11 +81,12 @@ class FaceOverlayView @JvmOverloads constructor(
         ValueAnimator.ofFloat(this.progress, progress).apply {
             duration = ANIMATE_DURATION
             addUpdateListener {
-                this@FaceOverlayView.progress = it.animatedFraction as Float
+                this@FaceOverlayView.progress = it.animatedValue as Float
                 invalidate()
             }
         }.start()
     }
+
     fun reset() {
         facePath.reset()
         progress = 0F
@@ -103,7 +99,7 @@ class FaceOverlayView @JvmOverloads constructor(
             0F,
             canvas.width.toFloat(),
             canvas.height.toFloat(),
-            backgroundPaint
+            backgroundPaint,
         )
         canvas.drawPath(facePath, maskPaint)
         canvas.drawPath(facePath, facePaint)
